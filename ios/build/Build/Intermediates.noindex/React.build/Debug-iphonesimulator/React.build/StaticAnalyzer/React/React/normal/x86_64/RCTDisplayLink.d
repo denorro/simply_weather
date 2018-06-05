@@ -1,0 +1,10 @@
+dependencies: \
+  /Users/denorrostallworth/Desktop/TechTower/reactnative_projects/SimplyWeather/node_modules/react-native/React/Base/RCTDisplayLink.m \
+  /Users/denorrostallworth/Desktop/TechTower/reactnative_projects/SimplyWeather/node_modules/react-native/React/Base/RCTDisplayLink.h \
+  /Users/denorrostallworth/Desktop/TechTower/reactnative_projects/SimplyWeather/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/denorrostallworth/Desktop/TechTower/reactnative_projects/SimplyWeather/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/denorrostallworth/Desktop/TechTower/reactnative_projects/SimplyWeather/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/denorrostallworth/Desktop/TechTower/reactnative_projects/SimplyWeather/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/denorrostallworth/Desktop/TechTower/reactnative_projects/SimplyWeather/node_modules/react-native/React/Base/RCTModuleData.h \
+  /Users/denorrostallworth/Desktop/TechTower/reactnative_projects/SimplyWeather/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/denorrostallworth/Desktop/TechTower/reactnative_projects/SimplyWeather/node_modules/react-native/React/Profiler/RCTProfile.h
