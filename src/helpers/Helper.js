@@ -1,4 +1,6 @@
 import {AsyncStorage} from "react-native";
+import {Toast} from "native-base";
+import AppConstants from "../config/AppConstants";
 
 export function parseURL(url){
     return (url.includes(' ')) ? url.replace(' ', '%20') : url;
@@ -32,4 +34,31 @@ export async function saveToStorage(key, item){
         console.log('Async Saved Failed: ', error);
     }
     return;
+}
+
+export async function searchCityByName(city){
+    return await fetch(parseURL(AppConstants.OpenWeatherCityURL + city) + AppConstants.OpenWeatherApiKey)
+        .then(results => results.json())
+        .then(data => {
+            this.setState({
+                readings: [...this.state.readings, data]
+            })
+        })
+        .catch(error => console.log(error))
+}
+
+export async function searchCityByCoordinates(lat, lon){
+    return await fetch(`${AppConstants.OpenWeatherCoordURL}&lat=${lat}&lon=${lon}${AppConstants.OpenWeatherApiKey}`)
+        .then(results => results.json())
+        .then(data => {
+            return data;
+        })
+        .catch(error => {
+            Toast.show({
+                text: error,
+                buttonText: 'OK',
+                duration: 3000
+            })
+            return null;
+        })
 }

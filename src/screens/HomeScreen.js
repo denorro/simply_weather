@@ -4,10 +4,16 @@ import {Container, Content, List, Icon, Toast, Spinner, ActionSheet} from 'nativ
 import AppData from '../data/AppData';
 import AppConstants from '../config/AppConstants';
 import CityCurrentTemp from "../components/CityCurrentTemp";
-import {capitalizeFirstLetter, getFromStorage, parseURL, saveToStorage} from "../helpers/Helper";
+import {
+    capitalizeFirstLetter,
+    getFromStorage,
+    parseURL,
+    saveToStorage,
+    searchCityByCoordinates
+} from "../helpers/Helper";
 import CitySearchForm from "../components/CitySearchForm";
 
-const API_URL = AppConstants.OpenWeatherRootURL;
+const API_URL = AppConstants.OpenWeatherCityURL;
 const API_KEY = AppConstants.OpenWeatherApiKey;
 const DELETE = 0;
 const CANCEL = 1;
@@ -29,19 +35,35 @@ class HomeScreen extends Component {
         super(props);
         this.state = {
             readings: [],
-            isLoading: false
+            isLoading: false,
+            currentPosition: {
+                latitude: 0.00,
+                longitude: 0.00
+            },
+            localWeatherReading: {}
         }
+
     }
 
-    async componentWillMount(){
-        await this.populateWeatherReadings();
-    }
-
-    componentDidMount(){
+    async componentDidMount(){
         this.props.navigation.setParams({
             trashAllCities: this.trashAllCities,
             refresh: this.refresh
-        })
+        });
+        await this.populateWeatherReadings();
+        await navigator.geolocation.getCurrentPosition(position => {
+                console.log(position);
+                searchCityByCoordinates(position.coords.latitude, position.coords.longitude)
+                    .then(results => console.log(results));
+
+            },
+            error => {
+                console.log(error)
+            },
+            {
+                timeout: 5000,
+                enableHighAccuracy: true
+            });
     }
 
     trashAllCities = () => {

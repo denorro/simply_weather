@@ -1,6 +1,7 @@
 const AppConstants = {
-    OpenWeatherApiKey: '&appid=OPEN_WEATHER_API_KEY',
-    OpenWeatherRootURL: 'https://api.openweathermap.org/data/2.5/weather?&units=imperial&type=accurate&q=',
+    OpenWeatherApiKey: '&appid=eb0ecaa19e421f5e691c839551fe4793',
+    OpenWeatherCityURL: 'https://api.openweathermap.org/data/2.5/weather?&units=imperial&type=accurate&q=',
+    OpenWeatherCoordURL: 'https://api.openweathermap.org/data/2.5/weather?&units=imperial&type=accurate&',
     OpenWeatherImageURL:'https://openweathermap.org/img/w/',
     DefaultWeatherIconWeb: 'http://images.clipartpanda.com/weather-clip-art-inclement_weather_Vector_Clipart.png',
     DefaultWeatherIconProj: require('SimplyWeather/src/images/weather-clip.png'),

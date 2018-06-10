@@ -20,9 +20,13 @@
 {
   NSURL *jsCodeLocation;
 
-  [GMSServices provideAPIKey:@"GOOGLE MAPS API KEY "];
+  [GMSServices provideAPIKey:@"AIzaSyCT_g-auLgEoZadAV7hFZU4FbAm2OvFhIA"];
 
+  //for ios simulator
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
+  
+  //For physical device
+  //jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"SimplyWeather"

@@ -8,12 +8,13 @@ import AppConstants from "../config/AppConstants";
 import CitySearchForm from "../components/CitySearchForm";
 import {capitalizeFirstLetter, getFromStorage, parseURL, saveToStorage} from "../helpers/Helper";
 
-var {height, width} = Dimensions.get('window');
+let {height, width} = Dimensions.get('window');
 const API_URL = AppConstants.OpenWeatherRootURL;
 const API_KEY = AppConstants.OpenWeatherApiKey;
 const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
 class DetailScreen extends Component {
 
     static navigationOptions = ({navigation}) => {
@@ -21,7 +22,7 @@ class DetailScreen extends Component {
         return {
             headerLeft: <Icon name="list"
                               style={{color: '#FFF'}}
-                              onPress={() => navigation.popToTop()} />,
+                              onPress={() => navigation.navigate('Home')} />,
             headerRight: <Icon name="add"
                                style={{color: '#FFF'}}
                                onPress={() => navigation.state.params.saveCityToList(tempLocal)} />
@@ -110,39 +111,38 @@ class DetailScreen extends Component {
                 <Spinner animating={this.state.isLoading} hidesWhenStopped={true} color={AppConstants.AppColor} />
             </Content> :
             <Content padder>
-                <CitySearchForm viewCity={this.viewCity} />
-                <H3 style={styles.TextMiddle}>
-                    {city.name}
-                </H3>
-                <Text note style={styles.TextMiddle}>
-                    Geo: {city.coord.lat},{city.coord.lon}
-                </Text>
-                <Text note style={styles.TextMiddle}>
-                    {`Sunrise/Sunset: ${moment.unix(city.sys.sunrise).format("h:mm:ss A")}/${moment.unix(city.sys.sunset).format("h:mm:ss A")}`}
-                </Text>
-                <View style={{flexDirection:'row', justifyContent: 'center', alignItems: 'center'}}>
-                    <Thumbnail large
-                               size={100}
-                               source={{uri: imageURL}}
-                    />
-                    <Text style={[styles.TextMiddle]}>
-                        {capitalizeFirstLetter(city.weather[city.weather.length - 1].description)}
+                    <CitySearchForm viewCity={this.viewCity} />
+                    <H3 style={styles.TextMiddle}>
+                        {city.name}
+                    </H3>
+                    <Text note style={styles.TextMiddle}>
+                        Geo: {city.coord.lat},{city.coord.lon}
                     </Text>
+                    <Text note style={styles.TextMiddle}>
+                        {`Sunrise/Sunset: ${moment.unix(city.sys.sunrise).format("h:mm:ss A")}/${moment.unix(city.sys.sunset).format("h:mm:ss A")}`}
+                    </Text>
+                    <View style={{flexDirection:'row', justifyContent: 'center', alignItems: 'center'}}>
+                        <Thumbnail large
+                                   size={100}
+                                   source={{uri: imageURL}}
+                        />
+                        <Text style={[styles.TextMiddle]}>
+                            {capitalizeFirstLetter(city.weather[city.weather.length - 1].description)}
+                        </Text>
 
-                </View>
-                <Text style={[styles.TextMiddle, styles.mb5]}>{`Current Temperature: ${city.main.temp} °F`}</Text>
-                <Text style={[styles.TextMiddle, styles.mb5]}>{`Humidity: ${city.main.humidity} %`}</Text>
-                <MapView
-                    provider={ PROVIDER_GOOGLE }
-                    style={ styles.map }
-                    customMapStyle={ RetroMapStyles }
-                    initialRegion={{
-                        latitude: city.coord.lat,
-                        longitude: city.coord.lon,
-                        latitudeDelta: LATITUDE_DELTA,
-                        longitudeDelta: LONGITUDE_DELTA,
-                    }}
-                />
+                    </View>
+                    <Text style={[styles.TextMiddle, styles.mb5]}>{`Current Temperature: ${city.main.temp} °F`}</Text>
+                    <Text style={[styles.TextMiddle, styles.mb5]}>{`Humidity: ${city.main.humidity} %`}</Text>
+                    <MapView
+                        style={ styles.map }
+                        customMapStyle={ RetroMapStyles }
+                        initialRegion={{
+                            latitude: city.coord.lat,
+                            longitude: city.coord.lon,
+                            latitudeDelta: LATITUDE_DELTA,
+                            longitudeDelta: LONGITUDE_DELTA,
+                        }}
+                    />
             </Content>
 
         return (
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     },
     map: {
         width: '100%',
-        height: '100%'
+        height: height * 0.5
     }
 })
 export default DetailScreen;
